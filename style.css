@@ -1,0 +1,379 @@
+:root {
+  --primary-color: #646cff;
+  --secondary-color: #535bf2;
+  --text-color: #213547;
+  --bg-color: #ffffff;
+  --card-bg: #f9f9f9;
+  --shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 30px;
+}
+
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 3px solid var(--primary-color);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: white;
+}
+
+.profile-photo:hover .upload-overlay {
+  opacity: 1;
+}
+
+.profile-info h1 {
+  font-size: 2.5em;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.profile-info p {
+  font-size: 1.2em;
+  margin: 5px 0 0;
+  color: var(--text-color);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.profile-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.profile-card h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Опыт работы */
+.experience-card {
+  grid-column: span 2;
+}
+
+.experience-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.exp-item {
+  background-color: rgba(100, 108, 255, 0.05);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s;
+}
+
+.exp-item:hover {
+  background-color: rgba(100, 108, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.exp-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.exp-date {
+  font-size: 0.9em;
+  opacity: 0.8;
+  background-color: rgba(100, 108, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.exp-company {
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exp-company::before {
+  content: "🏢";
+  font-size: 0.9em;
+}
+
+.exp-desc {
+  font-size: 0.95em;
+  line-height: 1.6;
+  opacity: 0.9;
+  padding-left: 5px;
+  border-left: 2px dotted rgba(100, 108, 255, 0.3);
+}
+
+/* Образование */
+.education-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.edu-item {
+  background-color: rgba(100, 108, 255, 0.05);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s;
+}
+
+.edu-item:hover {
+  background-color: rgba(100, 108, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.edu-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: var(--primary-color);
+}
+
+.edu-date {
+  font-size: 0.9em;
+  opacity: 0.8;
+  background-color: rgba(100, 108, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.edu-place {
+  font-weight: 500;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.edu-place::before {
+  content: "🎓";
+  font-size: 0.9em;
+}
+
+.edu-desc {
+  font-size: 0.95em;
+  line-height: 1.6;
+  opacity: 0.9;
+  padding-left: 5px;
+  border-left: 2px dotted rgba(100, 108, 255, 0.3);
+}
+
+/* Общие стили */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.tag {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+.language-item {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  background-color: rgba(100, 108, 255, 0.1);
+  border-radius: 6px;
+}
+
+.flag {
+  margin-right: 8px;
+}
+
+.level {
+  color: var(--secondary-color);
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
+.contacts-container {
+  margin-top: 15px;
+}
+
+.contact-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-btn {
+  background: none;
+  border: 1px dashed var(--primary-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+[contenteditable="true"] {
+  padding: 2px 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+[contenteditable="true"]:focus {
+  outline: none;
+  background-color: rgba(100, 108, 255, 0.2);
+}
+
+/* Эффект Material Wave */
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.wave.active {
+  animation: wave 0.6s ease-out;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .experience-card,
+  .education-card {
+    grid-column: span 1;
+  }
+}
