@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Моё резюме</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .editable { 
+            padding: 15px; 
+            margin: 10px 0; 
+            border: 1px dashed #ddd; 
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        button { 
+            padding: 12px 24px; 
+            background: #4285f4; 
+            color: white; 
+            border: none; 
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(66, 133, 244, 0.3);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1 contenteditable="true" class="editable">Иван Иванов</h1>
+    <h2 contenteditable="true" class="editable">Frontend разработчик</h2>
+    
+    <h3>Опыт работы</h3>
+    <div contenteditable="true" class="editable">
+        Компания "Технологии", 2020-2023<br>
+        - Разработка веб-приложений<br>
+        - Оптимизация производительности
+    </div>
+    
+    <h3>Образование</h3>
+    <div contenteditable="true" class="editable">
+        Университет, 2016-2020<br>
+        Специальность: Компьютерные науки
+    </div>
+    
+    <a href="resume.pdf" download>
+        <button id="downloadBtn">Скачать PDF</button>
+    </a>
+    
+    <script>
+        // Эффект волны
+        document.querySelectorAll('.editable').forEach(item => {
+            item.addEventListener('click', function(e) {
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple-effect');
+                this.appendChild(ripple);
+                
+                let rect = this.getBoundingClientRect();
+                ripple.style.left = (e.clientX - rect.left) + 'px';
+                ripple.style.top = (e.clientY - rect.top) + 'px';
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>
