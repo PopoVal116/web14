@@ -1,11 +1,179 @@
-<div class="profile-container" contenteditable="true">
-  <div class="profile-photo" id="photoUpload">
-    <img id="profileImage" src="https://via.placeholder.com/100" alt="Фото">
-  </div>
-  <h1>Имя Фамилия</h1>
-  <div>Контакт: email@example.com</div>
-</div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Моё Резюме</title>
+  <style>
+    :root {
+      --primary-color: #646cff;
+      --text-color: #213547;
+      --bg-color: #ffffff;
+    }
 
-<input type="file" id="photoInput" accept="image/*" style="display: none">
-<button id="addItem">Добавить блок</button>
-<button id="downloadBtn">Скачать PDF</button>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--primary-color);
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1, h2, p, div {
+      transition: background-color 0.3s;
+    }
+
+    [contenteditable="true"]:focus {
+      background-color: rgba(100, 108, 255, 0.1);
+      outline: none;
+    }
+
+    .editable {
+      padding: 5px;
+      border-radius: 4px;
+    }
+
+    .section {
+      margin: 20px 0;
+    }
+
+    button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    button:hover {
+      background: #535bf2;
+    }
+
+    /* Material Wave */
+    .wave {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: wave 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes wave {
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .profile-photo {
+        width: 80px;
+        height: 80px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="resume" contenteditable="true">
+    <div class="profile-photo" id="photoUpload">
+      <img id="profileImage" src="https://via.placeholder.com/120" alt="Фото профиля">
+    </div>
+    <h1 class="editable">Имя Фамилия</h1>
+    <div class="editable">Контакт: email@example.com</div>
+
+    <div class="section">
+      <h2 class="editable">Опыт работы</h2>
+      <div class="editable">🛠 Frontend Developer в Компания (2022 - наст. время)</div>
+      <div class="editable">🛠 Intern в Startup (2021 - 2022)</div>
+    </div>
+
+    <div class="section">
+      <h2 class="editable">Образование</h2>
+      <div class="editable">🎓 Университет, Факультет Информатики (2018 - 2022)</div>
+    </div>
+  </div>
+
+  <input type="file" id="photoInput" accept="image/*" style="display: none;">
+  <br>
+  <button id="downloadBtn">Скачать PDF</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    const resume = document.getElementById('resume');
+    const input = document.getElementById('photoInput');
+    const photo = document.getElementById('profileImage');
+
+    // Вставка фото
+    document.getElementById('photoUpload').addEventListener('click', () => input.click());
+
+    input.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        photo.src = reader.result;
+        localStorage.setItem('photo', reader.result);
+      };
+      reader.readAsDataURL(file);
+    });
+
+    // Сохранение текста
+    resume.addEventListener('input', () => {
+      localStorage.setItem('resumeContent', resume.innerHTML);
+    });
+
+    // Восстановление
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('resumeContent');
+      if (saved) resume.innerHTML = saved;
+      const savedPhoto = localStorage.getItem('photo');
+      if (savedPhoto) photo.src = savedPhoto;
+    });
+
+    // Скачивание PDF
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const clone = resume.cloneNode(true);
+      clone.removeAttribute('contenteditable');
+      html2pdf().from(clone).save('resume.pdf');
+    });
+
+    // Material Wave
+    document.querySelectorAll('button, .editable').forEach(el => {
+      el.addEventListener('click', function (e) {
+        const wave = document.createElement('span');
+        wave.className = 'wave';
+        const rect = el.getBoundingClientRect();
+        wave.style.left = `${e.clientX - rect.left}px`;
+        wave.style.top = `${e.clientY - rect.top}px`;
+        el.appendChild(wave);
+        setTimeout(() => wave.remove(), 600);
+      });
+    });
+  </script>
+</body>
+</html>
