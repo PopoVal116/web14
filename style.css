@@ -377,3 +377,36 @@ button:hover {
     grid-column: span 1;
   }
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.exp-item,
+.edu-item,
+.profile-card {
+  animation: fadeInUp 0.5s ease both;
+}
+
+[contenteditable="true"]:focus {
+  outline: none;
+  background-color: rgba(100, 108, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.3);
+}
+
+.tag::before {
+  content: "⭐";
+  margin-right: 6px;
+}
+
+.tag:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
