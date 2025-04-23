@@ -6,9 +6,9 @@
   <title>Моё Резюме</title>
   <style>
     :root {
-      --primary-color: #646cff;
-      --text-color: #213547;
-      --bg-color: #ffffff;
+      --primary-color: #009688;
+      --text-color: #2c3e50;
+      --bg-color: #f4f4f4;
     }
 
     body {
@@ -45,7 +45,7 @@
     }
 
     [contenteditable="true"]:focus {
-      background-color: rgba(100, 108, 255, 0.1);
+      background-color: rgba(0, 150, 136, 0.1);
       outline: none;
     }
 
@@ -70,10 +70,9 @@
     }
 
     button:hover {
-      background: #535bf2;
+      background: #00796b;
     }
 
-    /* Material Wave */
     .wave {
       position: absolute;
       border-radius: 50%;
@@ -128,7 +127,7 @@
     const input = document.getElementById('photoInput');
     const photo = document.getElementById('profileImage');
 
-    // Вставка фото
+    // Загрузка фото
     document.getElementById('photoUpload').addEventListener('click', () => input.click());
 
     input.addEventListener('change', e => {
@@ -142,12 +141,12 @@
       reader.readAsDataURL(file);
     });
 
-    // Сохранение текста
+    // Сохраняем текст
     resume.addEventListener('input', () => {
       localStorage.setItem('resumeContent', resume.innerHTML);
     });
 
-    // Восстановление
+    // Восстанавливаем
     window.addEventListener('load', () => {
       const saved = localStorage.getItem('resumeContent');
       if (saved) resume.innerHTML = saved;
@@ -155,14 +154,14 @@
       if (savedPhoto) photo.src = savedPhoto;
     });
 
-    // Скачивание PDF
+    // Скачать PDF
     document.getElementById('downloadBtn').addEventListener('click', () => {
       const clone = resume.cloneNode(true);
       clone.removeAttribute('contenteditable');
       html2pdf().from(clone).save('resume.pdf');
     });
 
-    // Material Wave
+    // Ripple эффект
     document.querySelectorAll('button, .editable').forEach(el => {
       el.addEventListener('click', function (e) {
         const wave = document.createElement('span');
